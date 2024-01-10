@@ -17,30 +17,16 @@
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Event</a></li>
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Transaksi</a></li>
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Materi</a></li>
-                        @endif
-                        
-                        @if(\Auth::user()->user_access_id==6)
-                            <!-- <li><a href="route('kasir.index')" class="text-info icon-menu px-1">Dashboard</a></li>
-                            <li class="dropdown">
+
+                            <!-- <li class="dropdown">
                                 <a href="#" class="text-info dropdown-toggle icon-menu px-1" data-toggle="dropdown">Produk</a>
                                 <ul class="dropdown-menu user-menu menu-icon">
-                                    <li><a href="{{ route('product.index') }}">Stok</a></li>
-                                    <li><a href="{{ route('konsinyasi.index') }}">Konsinyasi</a></li>
+                                    <li><a href="{{ route('event.index') }}">Stok</a></li>
+                                    <li><a href="{{ route('event.index') }}">Konsinyasi</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="route('kasir.index')" class="text-info icon-menu px-1">Kasir</a></li> -->
+                            </li> -->
                         @endif
-
-                        <!-- Supplier -->
-                        @if(\Auth::user()->user_access_id==7)
-                            <li><a href="{{ route('supplier.index') }}" class="text-info icon-menu px-1">Dashboard</a></li>
-                            <li><a href="{{ route('product-supplier.index') }}" class="text-info icon-menu px-1">Produk</a></li>
-                            <li><a href="{{ route('purchase-order-supplier.index') }}" class="text-info icon-menu px-1">Purchase Order</a></li>
-                            <li><a href="{{ route('delivery-order.index') }}" class="text-info icon-menu px-1">Delivery Order</a></li>
-                            <li><a href="{{ route('refund-product.index') }}" class="text-info icon-menu px-1">Refund</a></li>
-                          
-                            <!-- <li><a href="route('kasir.index')" class="text-info icon-menu px-1">Kasir</a></li> -->
-                        @endif
+                      
 
                     </ul>
                 </div>

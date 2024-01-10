@@ -80,44 +80,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(App\Models\Supplier::orderBy('id','DESC')->take(5)->get() as $k => $item)
-                                    <tr>
-                                        <td style="width: 50px;" class="text-center">{{$k+1}}</td>
-                                        <td class="text-center">
-                                            @if($item->status==0)
-                                                <span class="badge badge-warning">Inactive</span>
-                                            @endif
-                                            @if($item->status==1)
-                                                <span class="badge badge-success">Active</span>
-                                            @endif
-                                           
-                                        </td>
-
-                                        <td>{{ $item->nama_supplier }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->tipe_supplier }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a href="{{route('purchase-order.detail',$item->id)}}" class="dropdown-item"><i class="fa fa-info"></i> Detail</a>
-                                                    @if($item->status==1)
-                                                        <a href="{{route('purchase-order.insert-delivery-order',$item->id)}}" class="dropdown-item"><i class="fa fa-plus"></i> Delivery Order</a>
-                                                    @endif
-                                                </div>
-                                            </div>    
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-12" style="float: right;">
-                                <a href="{{ route('user-supplier.index') }}" class="btn btn-info"><i class="fa fa-eye"></i> Lihat Lebih Banyak</a> 
+                                <a href="{{ route('event.index') }}" class="btn btn-info"><i class="fa fa-eye"></i> Lihat Lebih Banyak</a> 
                             </div>
                         </div>
                     </div>
@@ -149,42 +119,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(App\Models\Buyer::orderBy('id','DESC')->take(5)->get() as $k => $item)
-                                    <tr>
-                                        <td style="width: 50px;" class="text-center">{{$k+1}}</td>
-                                        <td class="text-center">
-                                            @if($item->status==0)
-                                                <span class="badge badge-warning">Inactive</span>
-                                            @endif
-                                            @if($item->status==1)
-                                                <span class="badge badge-success">Active</span>
-                                            @endif
-                                           
-                                        </td>
-
-                                        <td>{{ $item->nama_buyer }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a href="{{route('purchase-order.detail',$item->id)}}" class="dropdown-item"><i class="fa fa-info"></i> Detail</a>
-                                                    @if($item->status==1)
-                                                        <a href="{{route('purchase-order.insert-delivery-order',$item->id)}}" class="dropdown-item"><i class="fa fa-plus"></i> Delivery Order</a>
-                                                    @endif
-                                                </div>
-                                            </div>    
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    <!-- foreach(App\Models\Buyer::orderBy('id','DESC')->take(5)->get() as $k => $item)
+                                    
+                                    endforeach -->
                                 </tbody>
                             </table>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-md-12" style="float: right;">
-                                <a href="{{ route('user-buyer.index') }}" class="btn btn-info"><i class="fa fa-eye"></i> Lihat Lebih Banyak</a> 
+                                <a href="{{ route('event.index') }}" class="btn btn-info"><i class="fa fa-eye"></i> Lihat Lebih Banyak</a> 
                             </div>
                         </div>
                     </div>
@@ -193,89 +137,6 @@
         </div>
     </div>
 
-
-    <!-- <div class="col-12 px-0 mx-0">
-        <div class="card mb-2">
-            <div class="body">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#tab_pembelian">{{ __('Produk Terbanyak Dibeli') }} </a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab_penjualan">{{ __('Penjualan') }} </a></li>
-                </ul>
-                <div class="tab-content px-0">
-                    <div class="tab-pane" id="tab_supplier">
-                        <div class="table-responsive">
-                            <table class="table table-hover m-b-0 c_list table-bordered">
-                                <thead style="background: #eee;">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Supplier</th>                                 
-                                        <th>No Telepon</th>
-                                        <th>Alamat</th>
-                                        <th>Email</th>
-                                        <th>Created At</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane active show" id="tab_pembelian">
-                        <div class="table-responsive">
-                            <div class="row mb-3">
-                                <div class="col-2">
-                                    <input type="text" class="form-control" placeholder="Pencarian" />
-                                </div>
-                                <div class="col-2">
-                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modal_form_pembelian" class="btn btn-info"><i class="fa fa-plus"></i> Tambah</a>
-                                </div>
-                            </div>
-                            <table class="table m-b-0 c_list table-hover table-bordered">
-                                <thead>
-                                    <tr style="background: #eee;">
-                                        <th>No</th>
-                                        <th>Requester</th>
-                                        <th>PR Number</th>
-                                        <th>PR Date</th>
-                                        <th>PO Number</th>
-                                        <th>PO Date</th>
-                                        <th>DO Number</th>
-                                        <th>Receipt Date</th>
-                                        <th>Price</th>
-                                        <th>Unit</th>
-                                        <th>Total</th>
-                                        <th>Total Margin</th>
-                                        <th>Expired Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tab_penjualan">
-                        <div class="table-responsive">
-                            <table class="table table-striped m-b-0 c_list table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>No Transaksi</th>
-                                        <th>Harga Jual</th>
-                                        <th>QTY</th>
-                                        <th>Total</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
 
 <div class="modal fade" id="modal_autologin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

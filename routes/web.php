@@ -120,8 +120,8 @@ Route::group(['middleware' => ['auth','access:1']], function(){
     // Route::get('user-supplier/listproduk/{data}',App\Http\Livewire\UserSupplier\ListProduk::class)->name('user-supplier.listproduk');
 
 
-    Route::get('event',App\Http\Livewire\CreateEvent\Index::class)->name('event.index');
-    Route::get('add-event',App\Http\Livewire\CreateEvent\Insert::class)->name('event.add');
+    Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
+    Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
     // Route::get('transaksi',App\Http\Livewire\Transaction\Index::class)->name('transaction.index');
 });
 

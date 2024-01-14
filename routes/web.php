@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth','access:1']], function(){
 
     Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
     Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
+    Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
     // Route::get('transaksi',App\Http\Livewire\Transaction\Index::class)->name('transaction.index');
 });
 

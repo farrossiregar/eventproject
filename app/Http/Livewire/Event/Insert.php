@@ -13,7 +13,7 @@ class Insert extends Component
     public $barcode,$desc_product,$nama_product, $qty, $price, $file;
     public function render()
     {
-        return view('livewire.create-event.insert');
+        return view('livewire.event.insert');
     }
 
     public function save()

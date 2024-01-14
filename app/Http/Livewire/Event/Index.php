@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Event;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\Event;
 use Auth;
 
 class Index extends Component
@@ -14,7 +15,7 @@ class Index extends Component
     public function render()
     {
         $user = Auth::user();
-        $data = [];
+        $data = Event::where('user_id', $user->id)->orderBy('id', 'desc');
 
         // if($this->keyword){
         //     $data->where('nama_product','LIKE',"%{$this->keyword}%")
@@ -28,5 +29,14 @@ class Index extends Component
     public function delete($id){
         $delete = SupplierProduct::where('id', $id)->first();
         $delete->delete();
+    }
+
+
+    public function insert(){
+        // $insert_event = new Event();
+        // $insert_event->user_id = Auth::user()->id;
+        // $insert_event->save();
+
+        return redirect()->route('event.add');
     }
 }

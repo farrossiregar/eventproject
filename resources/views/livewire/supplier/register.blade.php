@@ -1,45 +1,21 @@
-
-        <style>
-            .gradient-custom {
-            /* fallback for old browsers */
-            /* background: #f093fb; */
-            background-image: url('https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-
-            /* Chrome 10-25, Safari 5.1-6 */
-            /* background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1)); */
-
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            /* background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1)) */
-            }
-
-            .card-registration .select-input.form-control[readonly]:not([disabled]) {
-            font-size: 1rem;
-            line-height: 2.15;
-            padding-left: .75em;
-            padding-right: .75em;
-            }
-            .card-registration .select-arrow {
-            top: 13px;
-            }
-        </style>
+@section('title', 'Register')
         
-        <!-- <div class="container"> -->
-            <!-- <div class="row"> -->
-                <section class="vh-100 gradient-custom">
-                    <div class="container py-5 h-100">
-                        <div class="row justify-content-center align-items-center h-100">
-                        <div class="col-12 col-lg-9 col-xl-7">
-                            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                            <div class="card-body p-4 p-md-5">
-                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registrasi Event Creator</h3>
-                                <form>
-
+<div class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-8">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-8">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registrasi Event Creator</h3>
+                        <form class="form-auth-small" method="POST" wire:submit.prevent="register" action="" >
+                            <div>
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
                                             <label class="form-label" for="firstName">First Name</label>
-                                            <input type="text" id="firstName" class="form-control form-control-lg" />
+                                            <input type="text" id="firstName" class="form-control form-control-lg" wire:model="creator_first_name"  />
+                                            <!-- <input type="text" class="form-control" wire:model="nama_supplier" /> -->
                                             
                                         </div>
 
@@ -48,7 +24,7 @@
 
                                         <div class="form-outline">
                                             <label class="form-label" for="lastName">Last Name</label>
-                                            <input type="text" id="lastName" class="form-control form-control-lg" />
+                                            <input type="text" id="lastName" class="form-control form-control-lg" wire:model="creator_last_name" />
                                             
                                         </div>
 
@@ -57,39 +33,81 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline">
-                                        <label class="form-label" for="emailAddress">Email</label>
-                                        <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                                        
-                                    </div>
-
-                                    </div>
-                                    <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline">
-                                        <label class="form-label" for="phoneNumber">Phone Number</label>
-                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                                        
-                                    </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-
                                         <div class="form-outline">
-                                            <label class="form-label" for="firstName">Perusahaan</label>
-                                            <input type="text" id="firstName" class="form-control form-control-lg" />
-                                            
+                                            <label class="form-label" for="emailAddress">Email</label>
+                                            <input type="email" id="emailAddress" class="form-control form-control-lg"  wire:model="creator_email"/>
                                         </div>
-
                                     </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="phoneNumber">Phone Number</label>
+                                            <input type="tel" id="phoneNumber" class="form-control form-control-lg"  wire:model="creator_phone"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="emailAddress">Password</label>
+                                            <input type="password" id="emailAddress" class="form-control form-control-lg"  wire:model="creator_password"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label" for="phoneNumber">Confirm Password</label>
+                                            <input type="password" id="phoneNumber" class="form-control form-control-lg"  wire:model="creator_confirm_password"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="firstName">Nama Perusahaan</label>
+                                                            <input type="text" id="firstName" class="form-control form-control-lg"  wire:model="creator_company"/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                    <div class="col-md-12">
+                                                        <br>
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="firstName">Bergerak di Bidang</label>
+                                                            <!-- <input type="text" id="firstName" class="form-control form-control-lg"  wire:model="creator_company_field"/> -->
+                                                            <select class="select form-control"   wire:model="creator_company_field">
+                                                                <option value="1" disabled>Choose option</option>
+                                                                <option value="2">Subject 1</option>
+                                                                <option value="3">Subject 2</option>
+                                                                <option value="4">Subject 3</option>
+                                                            </select>
+                                                            <label class="form-label select-label">Choose option</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="firstName">Alamat Perusahaan</label>
+                                                    
+                                                    <textarea class="form-control form-control-lg" name="" id="" cols="30" rows="6" wire:model="creator_address"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     
                                 </div>
 
-                                <!-- <div class="row">
+                                <div class="row">
                                     <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                     <div class="form-outline datepicker w-100">
@@ -121,27 +139,15 @@
                                     </div>
 
                                     </div>
-                                </div> -->
+                                </div>
 
                                 
 
-                                <div class="row">
-                                    <div class="col-12">
+                              
 
-                                    <select class="select form-control-lg">
-                                        <option value="1" disabled>Choose option</option>
-                                        <option value="2">Subject 1</option>
-                                        <option value="3">Subject 2</option>
-                                        <option value="4">Subject 3</option>
-                                    </select>
-                                    <label class="form-label select-label">Choose option</label>
-
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 pt-2">
+                                <!-- <div class="mt-4 pt-2">
                                     <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                                </div>
+                                </div> -->
 
                                 <div class="form-group col-md-12">
                                     <hr />
@@ -150,17 +156,36 @@
                                     <button type="submit" class="ml-3 btn btn-primary">{{ __('Submit Pendaftaran') }} <i class="fa fa-check"></i></button>
                                     
                                 </div>
+                            </div>
 
-                                </form>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
+
+                        </form>
                     </div>
-                </section>
-            <!-- </div> -->
-        <!-- </div> -->
-        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .gradient-custom {
+
+    background-image: url('https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+</style>
+
         
         
            

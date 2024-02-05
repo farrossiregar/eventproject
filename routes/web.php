@@ -17,6 +17,14 @@ Route::get('/', Home::class)->name('home')->middleware('auth');
 Route::get('privacy', App\Http\Livewire\Privacy::class)->name('privacy');
 Route::get('login', App\Http\Livewire\Login::class)->name('login');
 Route::get('register', App\Http\Livewire\Register::class)->name('register');
+
+Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
+// Route::get('event/add',App\Http\Livewire\Event\Insert::class)->name('event.add');
+Route::get('event/insert',App\Http\Livewire\Event\Insert::class)->name('event.insert');
+Route::post('event/save',App\Http\Livewire\Event\Insert::class, 'create_event')->name('event.save');
+Route::get('event/detail/{data}',App\Http\Livewire\Event\Detail::class)->name('event.detail');
+
+
 Route::get('supplier-register', App\Http\Livewire\Supplier\Register::class)->name('supplier-register');
 Route::get('buyer-register', App\Http\Livewire\Koperasi\Register::class)->name('buyer-register');
 Route::get('konfirmasi-pembayaran',App\Http\Livewire\KonfirmasiPembayaran::class)->name('konfirmasi-pembayaran');
@@ -120,11 +128,16 @@ Route::group(['middleware' => ['auth','access:1']], function(){
     // Route::get('user-supplier/listproduk/{data}',App\Http\Livewire\UserSupplier\ListProduk::class)->name('user-supplier.listproduk');
 
 
-    Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
-    Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
-    Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
+  
+    // Route::get('add-event',App\Http\Livewire\Event\Insert::class)->name('event.add');
     // Route::get('transaksi',App\Http\Livewire\Transaction\Index::class)->name('transaction.index');
 });
+
+
+// Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
+// // Route::get('event/add',App\Http\Livewire\Event\Insert::class)->name('event.add');
+// Route::get('event/insert',App\Http\Livewire\Event\Insert::class)->name('event.insert');
+// Route::post('event/save',App\Http\Livewire\Event\Insert::class, 'save')->name('event.save');
 
 // Administrator dan Kasir
 Route::group(['middleware' => ['auth','access:1,6']], function(){

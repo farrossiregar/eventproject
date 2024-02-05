@@ -5,7 +5,8 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\UserMember;
 use App\Models\Supplier;
-use App\Models\Buyer;
+use App\Models\Creator;
+// use App\Models\Buyer;
 use App\Models\User;
 use Illuminate\Validation\Rule; 
 use Illuminate\Support\Facades\Hash;
@@ -15,19 +16,21 @@ class Register extends Component
 	use WithFileUploads;
 	public $dataMember,$selected,$insert=false;
     public $nama_supplier, $error_nama_supplier, $no_telp, $alamat_supplier, $email, $tipe_supplier, $provinsi;
+    
+	public $creator_first_name, $creator_last_name, $creator_email, $creator_phone, $creator_company, $creator_company_field, $creator_address;
 	public $password, $confirm_password;
 	public $tipeuser, $tipe_user;
 	public $match_pw=true;
 	
-	protected $rules = [
-        'name' => 'required|string',
-        'name_kta' => 'required|string',
-        'email' => 'required|string',
-		'phone_number' => 'required',
-		'iuran_tetap'=>'required',
-		// 'sumbangan'=>'required',
-		'uang_pendaftaran'=>'required|numeric|min:50000',
-    ];
+	// protected $rules = [
+    //     'name' => 'required|string',
+    //     'name_kta' => 'required|string',
+    //     'email' => 'required|string',
+	// 	'phone_number' => 'required',
+	// 	'iuran_tetap'=>'required',
+	// 	// 'sumbangan'=>'required',
+	// 	'uang_pendaftaran'=>'required|numeric|min:50000',
+    // ];
 
 	
 
@@ -36,19 +39,19 @@ class Register extends Component
 		if($this->password){
 			if($this->confirm_password){
 				if($this->password != $this->confirm_password){
-					$match_pw=false;
+					$this->match_pw=false;
 				}else{
-					$match_pw=true;
+					$this->match_pw=true;
 				}
 			}else{
-				$match_pw=true;
+				$this->match_pw=true;
 			}
 		}else{
-			$match_pw=true;
+			$this->match_pw=true;
 		}
 		// dd($match_pw);
 
-        return view('livewire.register')->layout('layouts.auth');
+        return view('livewire.supplier.register')->layout('layouts.auth');
     }
 
 	public function mount()
@@ -74,24 +77,26 @@ class Register extends Component
 
 	public function register(){
 
-		$rules = [
-			'nama_supplier' => 'required|string',
-			'no_telp' => 'required',
-			'email' => 'required',
-		];
+		// $rules = [
+		// 	'nama_supplier' => 'required|string',
+		// 	'no_telp' => 'required',
+		// 	'email' => 'required',
+		// ];
+		
 
-		$find = Supplier::where('nama_supplier',$this->nama_supplier)->first();
+		$find = Creator::where('nama_supplier',$this->nama_supplier)->first();
         if($find){
-            $this->error_nama_supplier = 'Nama Supplier sudah ada';
+            $this->error_nama_supplier = 'Nama Kreator sudah ada';
             return;
         }
 
         $user                   = new User();
-		if($this->tipe_user == '1'){
-			$user->user_access_id   = 8; // Buyer
-		}else{
+		// if($this->tipe_user == '1'){
+		// 	$user->user_access_id   = 8; // Buyer
+		// }else{
+		// 	$user->user_access_id   = 7; // Supplier
 			$user->user_access_id   = 7; // Supplier
-		}
+		// }
         
         $user->name             = $this->nama_supplier;
         $user->email            = $this->email;
@@ -99,27 +104,33 @@ class Register extends Component
         // $user->password         = Hash::make('12345678');
         $user->password         = Hash::make($this->password);
         $user->save();
+		dd('ok');
 
-		if($this->tipe_user == '1'){
-			$data                   = new Buyer();
-			$data->nama_buyer    	= $this->nama_supplier;
-			$data->email            = $this->email;
-			$data->no_telp          = $this->no_telp;
-			$data->alamat_buyer  	= $this->alamat_supplier;
-			// $data->provinsi		  	= $this->provinsi;
-			$data->id               = $user->id;
-			$data->save();
-		}else{
-			$data                   = new Supplier();
-			$data->nama_supplier    = $this->nama_supplier;
-			$data->email            = $this->email;
-			$data->no_telp          = $this->no_telp;
-			$data->alamat_supplier  = $this->alamat_supplier;
-			$data->tipe_supplier  	= $this->tipe_supplier;
-			$data->provinsi		  	= $this->provinsi;
-			$data->id               = $user->id;
-			$data->save();
-		}
+		// if($this->tipe_user == '1'){
+		// 	$data                   = new Buyer();
+		// 	$data->nama_buyer    	= $this->nama_supplier;
+		// 	$data->email            = $this->email;
+		// 	$data->no_telp          = $this->no_telp;
+		// 	$data->alamat_buyer  	= $this->alamat_supplier;
+		// 	// $data->provinsi		  	= $this->provinsi;
+		// 	$data->id               = $user->id;
+		// 	$data->save();
+		// }else{
+		// 	$data                   = new Supplier();
+		// 	$data->nama_supplier    = $this->nama_supplier;
+		// 	$data->email            = $this->email;
+		// 	$data->no_telp          = $this->no_telp;
+		// 	$data->alamat_supplier  = $this->alamat_supplier;
+		// 	$data->tipe_supplier  	= $this->tipe_supplier;
+		// 	$data->provinsi		  	= $this->provinsi;
+		// 	$data->id               = $user->id;
+		// 	$data->save();
+		// }
+
+		$data                   = new Creator();
+		$data->creator_name    	= $this->nama_supplier;
+		$data->id               = $user->id;
+		$data->save();
 
 		// return view('livewire.login')->layout('layouts.auth');
 		session()->flash('message-success',__('Data Berhasil disimpan'));

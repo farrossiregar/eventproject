@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToEvent extends Migration
+class AddStatusToEvent extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddUserIdToEvent extends Migration
     public function up()
     {
         Schema::table('event', function (Blueprint $table) {
-            $table->char('user_id', 10)->nullable();
+            $table->char('status', 10)->nullable();
         });
     }
 

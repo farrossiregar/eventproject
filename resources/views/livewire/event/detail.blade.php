@@ -8,8 +8,8 @@
     <div class="col-md-12">
         <div class="card">
             <div class="body">
-                <!-- <form id="basic-form" method="POST" wire:submit.prevent="create_event" action="" enctype="multipart/form-data"> -->
-                <form id="basic-form" method="POST" action="{{ route('event.save') }}" enctype="multipart/form-data">
+                <form id="basic-form" wire:submit.prevent="submit" enctype="multipart/form-data">
+                <!-- <form id="basic-form" method="POST" action="{{ route('event.save') }}" enctype="multipart/form-data"> -->
                     <div class="row">
                         <div class="col-md-8">
                             <div class="row form-group border-group">
@@ -157,7 +157,8 @@
 
                     <hr>
                     <a href="javascript:void(0)" onclick="history.back();"><i class="fa fa-arrow-left"></i> {{ __('Kembali') }}</a>
-                    <button type="submit" class="btn btn-primary ml-3"><i class="fa fa-save"></i> {{ __('Simpan Event') }}</button>
+                    <!-- <button  wire:loading.remove wire:target="save" type="submit" class="btn btn-primary ml-3"><i class="fa fa-save"></i> {{ __('Simpan Event') }}</button> -->
+                    <button type="submit" class="btn btn-info" wire:target="submit"><i class="fa fa-check-circle"></i> {{ __('Publish Event') }}</button>
                 </form>
             </div>
         </div>

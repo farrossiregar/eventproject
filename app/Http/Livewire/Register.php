@@ -17,10 +17,10 @@ class Register extends Component
 	public $dataMember,$selected,$insert=false;
     public $nama_supplier, $error_nama_supplier, $no_telp, $alamat_supplier, $email, $tipe_supplier, $provinsi;
     
-	public $creator_first_name, $creator_last_name, $creator_email, $creator_phone, $creator_company, $creator_company_field, $creator_address;
-	public $password, $confirm_password;
+	public $creator_first_name, $creator_last_name, $creator_email, $creator_password, $creator_confirm_password, $creator_phone, $creator_company, $creator_company_field, $creator_address;
+	
 	public $tipeuser, $tipe_user;
-	public $match_pw=true;
+	public $match_pw=true, $error_creator_company;
 	
 	// protected $rules = [
     //     'name' => 'required|string',
@@ -36,9 +36,9 @@ class Register extends Component
 
 	public function render()
     {
-		if($this->password){
-			if($this->confirm_password){
-				if($this->password != $this->confirm_password){
+		if($this->creator_password){
+			if($this->creator_confirm_password){
+				if($this->creator_password != $this->creator_confirm_password){
 					$this->match_pw=false;
 				}else{
 					$this->match_pw=true;
@@ -49,7 +49,7 @@ class Register extends Component
 		}else{
 			$this->match_pw=true;
 		}
-		// dd($match_pw);
+		
 
         return view('livewire.supplier.register')->layout('layouts.auth');
     }
@@ -59,21 +59,21 @@ class Register extends Component
 		$this->form_no = date('ymd').UserMember::count();
 	}
 
-	public function checkpw(){
-		if($this->password){
-			if($this->confirm_password){
-				if($this->password != $this->confirm_password){
-					$match_pw=false;
-				}else{
-					$match_pw=true;
-				}
-			}else{
-				$match_pw=true;
-			}
-		}else{
-			$match_pw=true;
-		}
-	}
+	// public function checkpw(){
+	// 	if($this->password){
+	// 		if($this->confirm_password){
+	// 			if($this->password != $this->confirm_password){
+	// 				$match_pw=false;
+	// 			}else{
+	// 				$match_pw=true;
+	// 			}
+	// 		}else{
+	// 			$match_pw=true;
+	// 		}
+	// 	}else{
+	// 		$match_pw=true;
+	// 	}
+	// }
 
 	public function register(){
 
@@ -84,52 +84,32 @@ class Register extends Component
 		// ];
 		
 
-		$find = Creator::where('nama_supplier',$this->nama_supplier)->first();
+		$find = Creator::where('creator_company',$this->creator_company)->first();
         if($find){
-            $this->error_nama_supplier = 'Nama Kreator sudah ada';
+            $this->error_creator_company = 'Kreator sudah ada';
             return;
         }
 
         $user                   = new User();
-		// if($this->tipe_user == '1'){
-		// 	$user->user_access_id   = 8; // Buyer
-		// }else{
-		// 	$user->user_access_id   = 7; // Supplier
-			$user->user_access_id   = 7; // Supplier
-		// }
+		$user->user_access_id   = 2; // Creator
+		
         
-        $user->name             = $this->nama_supplier;
-        $user->email            = $this->email;
-        $user->telepon          = $this->no_telp;
+        $user->name             = $this->creator_first_name.' '.$this->creator_last_name;
+        $user->email            = $this->creator_email;
+        $user->telepon          = $this->creator_phone;
         // $user->password         = Hash::make('12345678');
-        $user->password         = Hash::make($this->password);
+        $user->password         = Hash::make($this->creator_password);
         $user->save();
-		dd('ok');
+		
 
-		// if($this->tipe_user == '1'){
-		// 	$data                   = new Buyer();
-		// 	$data->nama_buyer    	= $this->nama_supplier;
-		// 	$data->email            = $this->email;
-		// 	$data->no_telp          = $this->no_telp;
-		// 	$data->alamat_buyer  	= $this->alamat_supplier;
-		// 	// $data->provinsi		  	= $this->provinsi;
-		// 	$data->id               = $user->id;
-		// 	$data->save();
-		// }else{
-		// 	$data                   = new Supplier();
-		// 	$data->nama_supplier    = $this->nama_supplier;
-		// 	$data->email            = $this->email;
-		// 	$data->no_telp          = $this->no_telp;
-		// 	$data->alamat_supplier  = $this->alamat_supplier;
-		// 	$data->tipe_supplier  	= $this->tipe_supplier;
-		// 	$data->provinsi		  	= $this->provinsi;
-		// 	$data->id               = $user->id;
-		// 	$data->save();
-		// }
-
-		$data                   = new Creator();
-		$data->creator_name    	= $this->nama_supplier;
-		$data->id               = $user->id;
+		$data                   		= new Creator();
+		$data->creator_name    			= $this->creator_first_name.' '.$this->creator_last_name;
+		$data->creator_email   			= $this->creator_email;
+		$data->creator_phone   			= $this->creator_phone;
+		$data->creator_company   		= $this->creator_company;
+		$data->creator_company_field   	= $this->creator_company_field;
+		$data->creator_address		   	= $this->creator_address;
+		$data->id               		= $user->id;
 		$data->save();
 
 		// return view('livewire.login')->layout('layouts.auth');

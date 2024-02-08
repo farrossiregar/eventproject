@@ -57,7 +57,7 @@
                                     <input type="text" class="form-control" wire:model="no_telp">
                                     @error('no_telp') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-<!-- 
+                                <!-- 
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputName">Provinsi</label>
                                     <select name="provinsi" class="form-control" wire:model="provinsi">

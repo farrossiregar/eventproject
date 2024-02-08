@@ -4,14 +4,18 @@ namespace App\Http\Livewire\Event;
 
 use Livewire\Component;
 use App\Models\Event;
+
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule; 
+use Illuminate\Support\Facades\Hash;
+
 use Auth;
 
 class Detail extends Component
 {
     use WithFileUploads;
 
-    public $data, $event_name;
+    public $data, $event_name, $event_cat, $event_desc, $event_date_start, $event_date_end, $event_link, $event_loc, $event_price;
     
 
     // protected $listeners = ['reload-page'=>'$refresh'];
@@ -58,15 +62,15 @@ class Detail extends Component
     public function submit()
     {
         // dd('test insert');
-        $this->save();
+        // $this->save();
         // $this->validate([
         //     'price' => 'required'
         // ]);
 
-        // $data = Event::where('id', $id)->first();
-        // $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
-        // $this->data->event_name = $this->event_name;
-        // $this->data->event_desc = $this->event_desc;
+        $data = Event::where('id', $id)->first();
+        $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
+        $this->data->event_name = $this->event_name;
+        $this->data->event_desc = $this->event_desc;
         
         $this->data->status = 1;
         $this->data->save();

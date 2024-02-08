@@ -47,16 +47,24 @@ class Index extends Component
 
     public function insert()
     {
-        $data = new Event();
-        // $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
-        // $data->event_name = $this->event_name;
-        // $data->event_desc = $this->event_desc;
+        $check = Event::where('status', '0')->orderBy('id', 'desc')->first();
         
-        $data->status = 0;
-        $data->save();
+        if($check){
+            return redirect()->route('event.detail',$check->id);
+        }else{
+            $data = new Event();
+            // $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
+            // $data->event_name = $this->event_name;
+            // $data->event_desc = $this->event_desc;
+            
+            $data->status = 0;
+            $data->save();
 
-        // \LogActivity::add('Purchase Order Insert');
+            // \LogActivity::add('Purchase Order Insert');
+            return redirect()->route('event.detail',$data->id);
+        }
+        
 
-        return redirect()->route('event.detail',$data->id);
+        
     }
 }

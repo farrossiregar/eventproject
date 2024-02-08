@@ -20,8 +20,8 @@ Route::get('register', App\Http\Livewire\Register::class)->name('register');
 
 Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
 // Route::get('event/add',App\Http\Livewire\Event\Insert::class)->name('event.add');
-Route::get('event/insert',App\Http\Livewire\Event\Insert::class)->name('event.insert');
-Route::post('event/save',App\Http\Livewire\Event\Insert::class, 'create_event')->name('event.save');
+// Route::get('event/insert',App\Http\Livewire\Event\Insert::class)->name('event.insert');
+// Route::post('event/save',App\Http\Livewire\Event\Insert::class, 'create_event')->name('event.save');
 Route::get('event/detail/{data}',App\Http\Livewire\Event\Detail::class)->name('event.detail');
 
 

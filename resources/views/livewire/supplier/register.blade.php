@@ -31,6 +31,7 @@
                                     </div>
                                 </div>
 
+
                                 <div class="row">
                                     <div class="col-md-6 mb-4 pb-2">
                                         <div class="form-outline">
@@ -58,6 +59,9 @@
                                             <label class="form-label" for="phoneNumber">Confirm Password</label>
                                             <input type="password" id="phoneNumber" class="form-control form-control-lg"  wire:model="creator_confirm_password"/>
                                         </div>
+                                        @if($match_pw == false)
+                                        <label class="form-label" style="color: red;">*Password tidak cocok</label>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -70,7 +74,9 @@
                                                         <div class="form-outline">
                                                             <label class="form-label" for="firstName">Nama Perusahaan</label>
                                                             <input type="text" id="firstName" class="form-control form-control-lg"  wire:model="creator_company"/>
-                                                            
+                                                            <!-- if($error_creator_company)
+                                                                <label class="form-label" style="color: red;">*$error_creator_company</label>
+                                                            endif -->
                                                         </div>
                                                     </div>
                                                     
@@ -107,15 +113,8 @@
                                     
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                                    <div class="form-outline datepicker w-100">
-                                        <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                                        <label for="birthdayDate" class="form-label">Birthday</label>
-                                    </div>
-
-                                    </div>
+                                <!-- <div class="row">
+                                    
                                     <div class="col-md-6 mb-4">
 
                                     <h6 class="mb-2 pb-1">Gender: </h6>
@@ -139,7 +138,7 @@
                                     </div>
 
                                     </div>
-                                </div>
+                                </div> -->
 
                                 
 

@@ -1,15 +1,12 @@
 @section('title', __('Create Event'))
-<style>
-    .border-group{
-        border: 1px solid lightgrey; border-radius: 5px; padding: 10px 0; width: 95%; margin: auto; margin-bottom: 5px;
-    }
-</style>
+
 <div class="row clearfix">
     <div class="col-md-12">
         <div class="card">
             <div class="body">
-                <form id="basic-form" wire:submit.prevent="submit" enctype="multipart/form-data">
-                <!-- <form id="basic-form" method="POST" action="{{ route('event.save') }}" enctype="multipart/form-data"> -->
+                <form id="basic-form" method="POST" wire:submit.prevent="submit" action="" enctype="multipart/form-data">
+                <!-- <form class="form-auth-small" method="POST" wire:submit.prevent="register" action="" > -->
+                
                     <div class="row">
                         <div class="col-md-8">
                             <div class="row form-group border-group">
@@ -22,13 +19,27 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <script src="https://cdn.tiny.cloud/1/bg7o7vohhlnriabhaypa6mlhi7mijsw1c8zc4l89y9fb116t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                                        <script src="https://cdn.tiny.cloud/1/r9svth2jn8ef4rv1eq24o68plcbnvn2k1cvxxderyan3yrbv/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
                                         <script>
                                         tinymce.init({
                                             selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
                                             plugins: 'code table lists',
                                             toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
                                         });
+
+
+                                        // tinymce.init({
+                                        //     selector: 'textarea',
+                                        //     plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+                                        //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                        //     tinycomments_mode: 'embedded',
+                                        //     tinycomments_author: 'Author name',
+                                        //     // mergetags_list: [
+                                        //     // { value: 'First.Name', title: 'First Name' },
+                                        //     // { value: 'Email', title: 'Email' },
+                                        //     // ],
+                                        //     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                                        // });
                                         </script>
 
                                         
@@ -100,7 +111,7 @@
 
                                     <div class="form-group">
                                         <label>{{ __('Link') }}</label>
-                                        <input type="text" class="form-control" wire:model="description" >
+                                        <input type="text" class="form-control" wire:model="event_link" >
                                         @error('description')
                                             <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                         @enderror
@@ -109,7 +120,7 @@
 
                                     <div class="form-group">
                                         <label>{{ __('Lokasi') }}</label>
-                                        <input type="text" class="form-control" wire:model="description" >
+                                        <input type="text" class="form-control" wire:model="event_loc" >
                                         @error('description')
                                             <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                         @enderror
@@ -128,7 +139,7 @@
 
                                     <div class="form-group">
                                         <label>{{ __('Harga') }}</label>
-                                        <input type="text" class="form-control" wire:model="description" >
+                                        <input type="text" class="form-control" wire:model="event_price" >
                                         @error('description')
                                             <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                         @enderror
@@ -158,9 +169,15 @@
                     <hr>
                     <a href="javascript:void(0)" onclick="history.back();"><i class="fa fa-arrow-left"></i> {{ __('Kembali') }}</a>
                     <!-- <button  wire:loading.remove wire:target="save" type="submit" class="btn btn-primary ml-3"><i class="fa fa-save"></i> {{ __('Simpan Event') }}</button> -->
-                    <button type="submit" class="btn btn-info" wire:target="submit"><i class="fa fa-check-circle"></i> {{ __('Publish Event') }}</button>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-check-circle"></i> {{ __('Publish Event') }}</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .border-group{
+        border: 1px solid lightgrey; border-radius: 5px; padding: 10px 0; width: 95%; margin: auto; margin-bottom: 5px;
+    }
+</style>

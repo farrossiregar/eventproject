@@ -15,7 +15,7 @@ class Detail extends Component
 {
     use WithFileUploads;
 
-    public $data, $event_name, $event_cat, $event_desc, $event_date_start, $event_date_end, $event_link, $event_loc, $event_price;
+    public $data, $event_name, $event_cat, $event_desc, $event_date_start, $event_date_end, $event_link, $event_loc, $event_price, $event_image;
     
 
     // protected $listeners = ['reload-page'=>'$refresh'];
@@ -67,10 +67,15 @@ class Detail extends Component
         //     'price' => 'required'
         // ]);
 
-        $data = Event::where('id', $id)->first();
-        $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
+        // $data = Event::where('id', $data->id)->first();
+        // $data->no_po = "PO/".date('ymd')."/".str_pad((PurchaseOrder::count()+1),4, '0', STR_PAD_LEFT);
         $this->data->event_name = $this->event_name;
         $this->data->event_desc = $this->event_desc;
+
+        $image = strtolower(str_replace(" ", "-", $this->event_image->getClientOriginalName()));
+        $this->event_image->storeAs('images/event', $image, 'event');
+        $this->data->event_image = $image;
+
         
         $this->data->status = 1;
         $this->data->save();

@@ -153,7 +153,7 @@
                                 <div class="col-md-12">    
                                     <div class="form-group">
                                         <label>Image</label>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" wire:model="event_image">
                                         @error('image')
                                             <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                         @enderror

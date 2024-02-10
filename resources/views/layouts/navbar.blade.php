@@ -11,7 +11,7 @@
                 <div id="navbar-menu float-left">
                     <ul class="nav navbar-nav">
                         <!---Administrator-->
-                        @if(\Auth::user()->user_access_id==1)
+                        <!-- if(\Auth::user()->user_access_id==1) -->
                            
                             <li><a href="{{route('home') }}" class="text-info icon-menu px-1">Dashboard</a></li>
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Event</a></li>
@@ -25,7 +25,7 @@
                                     <li><a href="{{ route('event.index') }}">Konsinyasi</a></li>
                                 </ul>
                             </li> -->
-                        @endif
+                        <!-- endif -->
                       
 
                     </ul>

@@ -20,8 +20,10 @@ class Index extends Component
         }
 
         $user = Auth::user();
+        
         $data = Event::where('user_id', $user->id)->orderBy('id', 'desc');
 
+        // dd($data->get());
         // if($this->keyword){
         //     $data->where('nama_product','LIKE',"%{$this->keyword}%")
         //         ->orWhere('barcode','LIKE',"%{$this->keyword}%");

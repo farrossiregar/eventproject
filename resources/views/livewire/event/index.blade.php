@@ -21,7 +21,7 @@
                         <i class="fa fa-database"></i>
                     </div>
                 <div class="content">
-                    <div class="text">Lunas</div>
+                    <div class="text">Event Berlangsung</div>
                     <h5 class="number">Rp. </h5>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                 <div class="content">
-                    <div class="text">Belum Lunas</div>
+                    <div class="text">Event Selesai</div>
                     <h5 class="number">Rp. </h5>
                 </div>
             </div>
@@ -106,7 +106,7 @@
             </div>
             <div class="body pt-0">
                 <div class="table-responsive">
-                    <table class="table table-hover m-b-0 c_list table-bordered">
+                    <table class="table table-hover m-b-0 c_list">
                         <thead style="background: #eee;">
                             <tr>
                                 <th class="text-center">No</th>
@@ -125,8 +125,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                        
+                            @foreach($data as $key => $item)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    @if($item->status == 0)
+                                        <span class="badge badge-info">Archived</span>
+                                    @endif
+                                    @if($item->status == 1)
+                                        <span class="badge badge-success">Published</span>
+                                    @endif
+                                </td>
+                                <td>{{ $item->event_name }}</td>
+                                <td>{{ $item->event_cat }}</td>
+                                <td>{{ date_format(date_create($item->event_date_start), 'd M Y H:i') }} - {{ date_format(date_create($item->event_date_end), 'd M Y H:i') }}</td>
+                                <td>{{ $item->event_name }}</td>
+                                <td>{{ ($item->event_price) ? 'Rp,'.format_idr($item->event_price) : '' }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-navicon"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            @if($item->status !=1)
+                                                <a href="javascript:void(0)" wire:click="$emit('void',{{$item->id}})" class="dropdown-item text-danger"><i class="fa fa-close"></i> Void</a>
+                                            @endif
+                                            <a href="{{route('event.detail',$item->id)}}" class="dropdown-item"><i class="fa fa-info"></i> Detail</a>
+                                        </div>
+                                    </div>    
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

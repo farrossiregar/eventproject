@@ -136,7 +136,7 @@
                                         <span class="badge badge-success">Published</span>
                                     @endif
                                 </td>
-                                <td>{{ $item->event_name }}</td>
+                                <td><a href="http://dev.eventproject.com/{{ $item->event_url }}" target="_blank">{{ $item->event_name }}</a></td>
                                 <td>{{ $item->event_cat }}</td>
                                 <td style="width:50%; align:center;">
                                     <div class="row">

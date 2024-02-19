@@ -24,6 +24,9 @@ Route::get('event',App\Http\Livewire\Event\Index::class)->name('event.index');
 // Route::post('event/save',App\Http\Livewire\Event\Insert::class, 'create_event')->name('event.save');
 Route::get('event/detail/{data}',App\Http\Livewire\Event\Detail::class)->name('event.detail');
 
+Route::get('transaksi',App\Http\Livewire\EventTransaksi\Index::class)->name('transaksi.index');
+Route::get('transaksi/items/{data}',App\Http\Livewire\EventTransaksi\Items::class)->name('transaksi.items');
+
 
 Route::get('supplier-register', App\Http\Livewire\Supplier\Register::class)->name('supplier-register');
 Route::get('buyer-register', App\Http\Livewire\Koperasi\Register::class)->name('buyer-register');
@@ -102,10 +105,10 @@ Route::group(['middleware' => ['auth','access:1']], function(){
   
     Route::get('migration',App\Http\Livewire\Migration\Index::class)->name('migration.index');
 
-    Route::get('transaksi',App\Http\Livewire\Transaksi\Index::class)->name('transaksi.index');
-    Route::get('transaksi/items/{data}',App\Http\Livewire\Transaksi\Items::class)->name('transaksi.items');
-    Route::get('transaksi/cetak-barcode/{no}',[\App\Http\Controllers\TransaksiController::class,'cetakBarcode'])->name('transaksi.cetak-barcode');
-    Route::get('transaksi/cetak-struk/{data}',[\App\Http\Controllers\TransaksiController::class,'cetakStruk'])->name('transaksi.cetak-struk');
+    // Route::get('transaksi',App\Http\Livewire\Transaksi\Index::class)->name('transaksi.index');
+    // Route::get('transaksi/items/{data}',App\Http\Livewire\Transaksi\Items::class)->name('transaksi.items');
+    // Route::get('transaksi/cetak-barcode/{no}',[\App\Http\Controllers\TransaksiController::class,'cetakBarcode'])->name('transaksi.cetak-barcode');
+    // Route::get('transaksi/cetak-struk/{data}',[\App\Http\Controllers\TransaksiController::class,'cetakStruk'])->name('transaksi.cetak-struk');
 
     // Produk
     Route::get('vendor/index',App\Http\Livewire\Vendor\Index::class)->name('vendor.index');

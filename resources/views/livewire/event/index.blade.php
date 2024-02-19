@@ -106,14 +106,14 @@
             </div>
             <div class="body pt-0">
                 <div class="table-responsive">
-                    <table class="table table-hover m-b-0 c_list">
+                    <table class="table table-hover m-b-0 c_list table-bordered">
                         <thead style="background: #eee;">
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Status</th>
                                 <th>Nama Event</th>
                                 <th>Kategori</th>
-                                <th>Tanggal Event (Start - End)</th>
+                                <th style="width:50%; align:center;">Tanggal Event (Start - End)</th>
                                 <th>Status Payment</th>
                                 <th>Harga</th>
                                 <th>Status Venue</th>
@@ -138,7 +138,25 @@
                                 </td>
                                 <td>{{ $item->event_name }}</td>
                                 <td>{{ $item->event_cat }}</td>
-                                <td>{{ date_format(date_create($item->event_date_start), 'd M Y H:i') }} - {{ date_format(date_create($item->event_date_end), 'd M Y H:i') }}</td>
+                                <td style="width:50%; align:center;">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-4">
+                                            <span class="badge badge-info">
+                                                <div class="col-md-12"><b>{{ date_format(date_create($item->event_date_start), 'd M Y') }}</b></div>
+                                                <div class="col-md-12">{{ date_format(date_create($item->event_date_start), 'H:i') }}</div> 
+                                            </span>
+                                        </div>
+                                        <div class="col-md-4">-</div>
+                                        <div class="col-md-4">
+                                            <span class="badge badge-info">
+                                                <div class="col-md-12"><b>{{ date_format(date_create($item->event_date_end), 'd M Y') }}</b></div>
+                                                <div class="col-md-12">{{ date_format(date_create($item->event_date_end), 'H:i') }}</div>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $item->event_name }}</td>
                                 <td>{{ ($item->event_price) ? 'Rp,'.format_idr($item->event_price) : '' }}</td>
                                 <td></td>

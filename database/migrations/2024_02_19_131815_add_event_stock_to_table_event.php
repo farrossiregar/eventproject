@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropEventDateSendFromEventTable extends Migration
+class AddEventStockToTableEvent extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class DropEventDateSendFromEventTable extends Migration
     public function up()
     {
         Schema::table('event', function (Blueprint $table) {
-            $table->dropColumn('event_date_send');
+            $table->integer('event_stock')->nullable()->after('event_price');
+            $table->char('event_link', 250)->nullable()->after('event_loc');
         });
     }
 
@@ -25,8 +26,8 @@ class DropEventDateSendFromEventTable extends Migration
      */
     public function down()
     {
-        Schema::table('event', function (Blueprint $table) {
-            $table->dropColumn('event_date_send');
+        Schema::table('table_event', function (Blueprint $table) {
+            //
         });
     }
 }

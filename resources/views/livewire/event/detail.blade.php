@@ -52,10 +52,12 @@
                                     <div class="form-group">
                                         <label>Kategori Event</label>
                                         <select class="form-control" wire:model="event_cat">
-                                            <option value="1">Event1</option>
-                                            <option value="2">Event2</option>
+                                            <option value="" selected>-- Pilih Kategori --</option>
+                                            @foreach(\App\Models\EventCategories::orderBy('id', 'desc')->get() as $item)
+                                                <option value="{{$item->id_event}}">{{$item->categories_name}}</option>
+                                            @endforeach
                                         </select>
-                                        @error('harga')
+                                        @error('event_cat')
                                             <ul class="parsley-errors-list filled" id="parsley-id-29"><li class="parsley-required">{{ $message }}</li></ul>
                                         @enderror
                                     </div>
@@ -100,7 +102,7 @@
                                 <div class="col-md-12">    
                                     <div class="form-group">
                                         <label>Venue</label>
-                                        <select class="form-control">
+                                        <select class="form-control" wire:model="event_venue">
                                             <option value="1">Online</option>
                                             <option value="2">Offline</option>
                                         </select>

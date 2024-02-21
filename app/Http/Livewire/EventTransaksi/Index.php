@@ -4,6 +4,8 @@ namespace App\Http\Livewire\EventTransaksi;
 
 use Livewire\Component;
 use App\Models\EventTransaksi;
+use App\Models\Event;
+use Auth;
 
 use App\Models\Transaksi;
 use App\Models\TransaksiItem;
@@ -54,7 +56,16 @@ class Index extends Component
 
     public function get_data()
     {
-        $data = \App\Models\EventTransaksi::orderBy('id','DESC');
+        $user = Auth::user();
+        if($user->user_access_id == '1'){
+            $data = \App\Models\EventTransaksi::orderBy('id','DESC');
+        }else{
+            $data = \App\Models\EventTransaksi::select('event_transaction.*', 'event.event_name', 'event.event_price')
+                                                ->join('event', 'event.id', '=', 'event_transaction.id_event')
+                                                ->where('event.user_id', $user->id)
+                                                ->orderBy('event_transaction.id','DESC');
+        }
+        
         // $data = Transaksi::with('anggota')->where('is_temp',0)->orderBy('id','DESC');
 
         // if($this->filter){

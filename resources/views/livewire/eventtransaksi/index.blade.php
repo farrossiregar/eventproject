@@ -8,7 +8,7 @@
                     <i class="fa fa-shopping-cart text-info"></i>
                 </div>
                 <div class="content">
-                    <div class="text">Penjualan hari ini</div>
+                    <div class="text">Lunas</div>
                     <h5 class="number">Rp. {{format_idr($penjualan_hari_ini)}}</h5>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                         <i class="fa fa-database"></i>
                     </div>
                 <div class="content">
-                    <div class="text">Transaksi hari ini</div>
+                    <div class="text">Menunggu Pembayaran</div>
                     <h5 class="number">{{$transaksi_hari_ini}}</h5>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                 <div class="content">
-                    <div class="text">Penjualan bulan ini</div>
+                    <div class="text">Transaksi bulan ini</div>
                     <h5 class="number">Rp. {{format_idr($penjualan_bulan_ini)}}</h5>
                 </div>
             </div>
@@ -140,13 +140,15 @@
                                 </th>
                                 <th>Status</th>
                                 <th>Nama Pembeli</th>
+                                <th>Nama Event</th>
                                 <th>No Transaksi</th>
+                                <th>Kode Tiket</th>
                                 <th class="text-center">Metode Pembayaran</th>
-                                <th>Tanggal Transaksi</th>
-                                <th>Status Pembayaran</th>
+                                <!-- <th>Tanggal Transaksi</th> -->
                                 <th class="text-center">Tanggal Pembayaran</th>
-                                <th class="text-right">Nominal</th>
-                                <!-- <th class="text-right">PPN</th> -->
+                                <th>Harga Tiket</th>
+                                <th class="text-right">Jumlah Tiket</th>
+                                <th class="text-right">Jumlah Bayar</th>
                                 <th class="text-right">Total<br />
                                     <label class="text-info">(Rp {{format_idr($total)}})</label>
                                 </th>
@@ -160,18 +162,12 @@
                                     <td style="width: 50px;" class="text-center">{{$number}}</td>
                                     <td class="text-center">
                                         <!-- if($cetak_invoice==true and $item->status==1 and $item->payment_date=="") -->
-                                            <label class="fancy-checkbox">
+                                            <!-- <label class="fancy-checkbox">
                                                 <input type="checkbox" value="{{$item->id}}" wire:model="check_id.{{$k}}">
                                                 <span></span>
-                                            </label>
+                                            </label> -->
                                         <!-- endif -->
                                     </td>
-                                    <td>{!!status_transaksi($item->status)!!}</td>
-                                  
-                                    <td>{{  $item->buyer_name }}</td>
-                                    <td><a href="route('eventtransaksi.items',$item->id)">{{$item->transaction_no}}</a></td>
-                                    <td class="text-center">{{$item->payment_method}}</td>
-                                    <td>{{date('d-M-Y H:i',strtotime($item->created_at))}}</td>
                                     <td class="text-center">
                                         @if($item->payment_date)
                                             <span class="badge badge-success">Lunas</span>
@@ -179,8 +175,27 @@
                                             <span class="badge badge-warning">Belum Lunas</span>
                                         @endif
                                     </td>
+                                    <!-- <td>{!!status_transaksi($item->status)!!}</td> -->
+                                  
+                                    <td>{{  $item->buyer_name }}</td>
+                                    <td>{{  $item->event_name }}</td>
+                                    <td><a href="route('eventtransaksi.items',$item->id)">{{$item->transaction_no}}</a></td>
+                                    <td><a href="route('eventtransaksi.items',$item->id)">
+                                        <ul>
+                                            @foreach(App\Models\Tiket::where('id_transaction', $item->id)->get() as $item_tiket)
+                                                <li>{{ $item_tiket->kode_tiket }} </li>
+                                            @endforeach
+                                        </ul>
+                                        
+                                        
+                                    </a></td>
+                                    <td class="text-center">{{$item->payment_method}}</td>
+                                    <!-- <td>{{date('d-M-Y H:i',strtotime($item->created_at))}}</td> -->
+                                    
                                     <td class="text-center">{{$item->payment_date ? date('d-M-Y',strtotime($item->payment_date)) : '-'}}</td>
+                                    <td class="text-right">Rp, {{  format_idr($item->event_price) }}</td>
                                     <td class="text-right">{{format_idr($item->amount)}}</td>
+                                    <td class="text-right">{{format_idr($item->amount*$item->event_price)}}</td>
                                     <!-- <td class="text-right">{{format_idr($item->amount * 0.11)}}</td> -->
                                     <td class="text-right">{{format_idr($item->amount)}}</td>
                                     <td>

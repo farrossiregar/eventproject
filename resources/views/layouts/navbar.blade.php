@@ -18,6 +18,8 @@
                             <li><a href="{{ route('transaksi.index') }}" class="text-info icon-menu px-1">Transaksi</a></li>
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Materi</a></li>
                             <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Kategori</a></li>
+                            <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Payment Method</a></li>
+                            <li><a href="{{ route('event.index') }}" class="text-info icon-menu px-1">Setting</a></li>
 
                             <!-- <li class="dropdown">
                                 <a href="#" class="text-info dropdown-toggle icon-menu px-1" data-toggle="dropdown">Produk</a>
